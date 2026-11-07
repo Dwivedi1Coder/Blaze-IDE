@@ -80,7 +80,7 @@ button { color: inherit; cursor: pointer; }
 .chevron, .folder-icon { color: var(--accent); }
 .root-actions { margin-left: auto; color: var(--subtle); }
 .file-tree { overflow: auto; flex: 1; padding: 4px 7px 12px; }
-.tree-item { display: flex; align-items: center; gap: 8px; min-height: 29px; padding: 4px 8px; border-radius: 5px; color: var(--muted); cursor: pointer; font-size: 12px; }
+.tree-item { display: flex; align-items: center; gap: 8px; min-height: calc(29px * var(--space)); padding: calc(4px * var(--space)) 8px; border-radius: 5px; color: var(--muted); cursor: pointer; font-size: 12px; }
 .tree-item:hover { background: var(--panel-hover); color: var(--text); }
 .tree-item.active { color: var(--text); background: var(--accent-soft); }
 .tree-item .file-glyph { width: 15px; color: var(--accent); text-align: center; font-size: 10px; font-weight: 800; }

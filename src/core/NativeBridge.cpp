@@ -2,6 +2,7 @@
 
 #include <cctype>
 #include <stdexcept>
+#include <utility>
 
 namespace blaze {
 
@@ -84,7 +85,7 @@ std::vector<std::string> NativeBridge::parseStringArguments(const char* request)
 
 std::string NativeBridge::toFileUri(const std::filesystem::path& path) {
     const std::string native = std::filesystem::absolute(path).generic_string();
-    std::string uri = "file:///";
+    std::string uri = native.empty() || native.front() != '/' ? "file:///" : "file://";
     for (const unsigned char character : native) {
         if (character == ' ') uri += "%20";
         else if (character == '#') uri += "%23";
