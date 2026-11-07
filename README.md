@@ -25,7 +25,7 @@ Implemented:
 - Workspace path validation that rejects absolute paths and traversal outside the workspace.
 - Output panel and editor tabs.
 
-Not yet implemented: syntax-aware code editing, language server integration, compiler discovery, real build/run execution, terminal emulation, debugging, Git workflows, plugin loading, and workspace picker. The Build and Run toolbar items are intentionally informational placeholders until those native services exist.
+Not yet implemented: syntax-aware code editing, language server integration, compiler discovery, real build/run execution, terminal emulation, debugging, Git workflows, plugin loading, and workspace picker. See [Plugin Architecture and JetBrains Compatibility](docs/PLUGIN_COMPATIBILITY.md) for the compatibility strategy and roadmap. The Build and Run toolbar items are intentionally informational placeholders until those native services exist.
 
 ## Build requirements
 
