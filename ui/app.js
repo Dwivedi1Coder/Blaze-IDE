@@ -1,7 +1,12 @@
 const $ = (selector) => document.querySelector(selector);
 const state = { workspace: null, openFiles: new Map(), activePath: null, settings: null };
 
-async function nativeResult(promise) {\n  const value = await promise;\n  return typeof value === "string" ? JSON.parse(value) : value;\n}\n\nfunction log(message) {
+async function nativeResult(promise) {
+  const value = await promise;
+  return typeof value === "string" ? JSON.parse(value) : value;
+}
+
+function log(message) {
   const line = document.createElement("div");
   line.className = "output-line";
   const stamp = document.createElement("span");

@@ -1,7 +1,6 @@
 #include "core/ApplicationCore.h"
 
 #include <fstream>
-#include <iterator>
 #include <sstream>
 #include <stdexcept>
 #include <system_error>
