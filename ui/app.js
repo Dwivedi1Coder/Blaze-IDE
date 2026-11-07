@@ -1,7 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const state = { workspace: null, openFiles: new Map(), activePath: null, settings: null };
 
-function log(message) {
+async function nativeResult(promise) {\n  const value = await promise;\n  return typeof value === "string" ? JSON.parse(value) : value;\n}\n\nfunction log(message) {
   const line = document.createElement("div");
   line.className = "output-line";
   const stamp = document.createElement("span");
@@ -164,7 +164,7 @@ function updateCursor() {
 async function openFile(path) {
   if (!state.openFiles.has(path)) {
     try {
-      const response = await window.nativeReadFile(path);
+      const response = await nativeResult(window.nativeReadFile(path));
       if (!response.ok) throw new Error(response.error || "Unable to read file");
       state.openFiles.set(path, { content: response.content, dirty: false });
     } catch (error) {
@@ -183,7 +183,7 @@ async function saveActiveFile() {
   const file = state.openFiles.get(state.activePath);
   if (!file || !state.activePath) return;
   try {
-    const response = await window.nativeWriteFile(state.activePath, file.content);
+    const response = await nativeResult(window.nativeWriteFile(state.activePath, file.content));
     if (!response.ok) throw new Error(response.error || "Unable to save file");
     file.dirty = false;
     log("Saved " + state.activePath);
@@ -195,7 +195,7 @@ async function saveActiveFile() {
 
 async function refreshWorkspace() {
   try {
-    state.workspace = await window.nativeGetWorkspace();
+    state.workspace = await nativeResult(window.nativeGetWorkspace());
     if (!state.workspace.ok) throw new Error(state.workspace.error || "Workspace unavailable");
     $("#workspace-title").textContent = state.workspace.root;
     $("#project-name").textContent = state.workspace.name || "Workspace";
@@ -220,7 +220,7 @@ async function createFile() {
   const path = $("#new-file-name").value.trim().replace(/\\/g, "/");
   if (!path) return;
   try {
-    const response = await window.nativeWriteFile(path, "");
+    const response = await nativeResult(window.nativeWriteFile(path, ""));
     if (!response.ok) throw new Error(response.error || "Could not create file");
     closeNewFileDialog();
     await refreshWorkspace();
